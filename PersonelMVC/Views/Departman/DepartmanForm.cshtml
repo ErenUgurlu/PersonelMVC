@@ -1,0 +1,36 @@
+﻿@model PersonelMVC.Models.EntityFrameWork.Departman
+@{
+    ViewBag.Title = "Kaydet";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+@*<form method="post">                              //klasik html kodları yerine aşşağıdaki html helper ile bu kodun aynı işlevindeki alternatif bir kodla çalışıldı
+        <div class="form-group">
+            <label>Departman Adı</label>
+            <input type="text" name="DepartmanIsmi" class="form-control" />
+
+        </div>
+        <button type="submit" class="btn btn-success">Ekle</button>
+    </form>*@
+
+@using (Html.BeginForm("Kaydet", "Departman", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.AntiForgeryToken()
+
+        @Html.Label("DepartmanIsmi", "Departman ismi")
+        @Html.TextBoxFor(m => m.DepartmanIsmi, new { @class = "from-control" })
+        @Html.ValidationMessageFor(m => m.DepartmanIsmi, "", new { @style = "color:red" })
+    </div>
+    @Html.HiddenFor(m => m.ID)
+    <button type="submit" class="btn btn-success">Ekle/Değiştir</button>
+
+}
+@section scripts
+    {
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

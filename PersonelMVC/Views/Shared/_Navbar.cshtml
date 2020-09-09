@@ -1,0 +1,51 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/home">Personel Yönetim Sistemi</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/Departman">Departmanlar </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/Personel">Personeller</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sistem Giriş
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Security/Login">Üye Girişi</a>
+
+                    @if (User.IsInRole("adm"))
+                    {<a class="dropdown-item " href="/kullanicilars" aria-disabled="true">Üye Sistemi</a>}
+
+                    else
+                    {<a class="dropdown-item disabled" href="/kullanicilars" aria-disabled="true">Üye Sistemi</a>}
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Security/Logout">Çıkış Yap</a>
+                </div>
+            </li>
+            @if (User.Identity.Name != null)
+            {
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">@User.Identity.Name</a>
+                </li>
+            }
+        </ul>
+        @*<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>*@
+        
+            <ul class="navbar-nav ">
+                <li class="nav-item dropdown">Toplam Personel:@{Html.RenderAction("ToplamPersonel", "Home");}</li>
+            </ul>
+        
+            
+    </div>
+    
+</nav>

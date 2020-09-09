@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PersonelMVC.Models.EntityFrameWork.personel>
+PersonelListesi
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Doğum Tarihi</th>
+            <th>Maaş</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <th>@personel.p_ad</th>
+                <th>@personel.p_soyad</th>
+                <th>@personel.dogum_tarihi.Value.ToShortDateString()</th>
+                <th>@personel.maas.Value.ToString("0000" + "$")</th>
+            </tr>
+        }
+    </tbody>
+</table>

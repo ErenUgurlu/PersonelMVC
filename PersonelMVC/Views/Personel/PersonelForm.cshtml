@@ -1,0 +1,79 @@
+﻿@model PersonelMVC.View_Models.PersonelFromViewModel
+@{
+    ViewBag.Title = "Kaydet";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>PersonelForm</h2>
+
+@using (Html.BeginForm("Kaydet", "Personel", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.p_ad, "Ad")
+        @Html.TextBoxFor(m => m.Personel.p_ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Personel.p_ad, "", new { @style = "color:red" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.p_soyad, "Soyad")
+        @Html.TextBoxFor(m => m.Personel.p_soyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Personel.p_soyad, "", new { @style = "color:red" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.dogum_tarihi, "Doğum Tarihi")
+        @Html.TextBoxFor(m => m.Personel.dogum_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.ise_baslama_tarihi, "Işe Başlama Tarihi")
+        @Html.TextBoxFor(m => m.Personel.ise_baslama_tarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.maas, "Maas")
+        @Html.TextBoxFor(m => m.Personel.maas, new { @class = "form-control" })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.prim, "Prim")
+        @Html.TextBoxFor(m => m.Personel.prim, new { @class = "form-control" })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.dogum_yeri, "Doğum Yeri")
+        @Html.TextBoxFor(m => m.Personel.dogum_yeri, new { @class = "form-control" })
+
+
+    </div>
+    <div class="custom-radio">
+        @Html.LabelFor(m => m.Personel.cinsiyet, "Cinsiyet")
+        <label>@Html.RadioButtonFor(m => m.Personel.cinsiyet, "E") Erkek</label>
+        <label>@Html.RadioButtonFor(m => m.Personel.cinsiyet, "K") Kadın</label>
+        @Html.ValidationMessageFor(m => m.Personel.cinsiyet, "", new { @style = "color:red" })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.departmanID, "Departmanlar")
+        @Html.DropDownListFor(m => m.Personel.departmanID, new SelectList(Model.Departmanlar, "ID", "DepartmanIsmi"), "Departman Seçiniz", new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.Personel.departmanID, "", new { @style = "color:red" })
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.Personel.p_no)
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+ 
+
+}
+
+@section scripts
+    {
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

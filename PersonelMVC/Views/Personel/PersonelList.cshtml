@@ -1,0 +1,71 @@
+﻿@using PersonelMVC.Models.EntityFrameWork
+@model List<personel>
+@{
+    ViewBag.Title = "PersonelList";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="margin:25px">PersonelList</h2>
+<div style="margin:25px">@Html.ActionLink("Yeni Personel", "YeniP", null, new { @class = "btn btn-dark" })</div>
+
+
+<table class="table table-striped" id="tblPersoneller">
+    <thead>
+        
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Cinsiyet</th>
+            <th>PersonelNo</th>
+            <th>Departman</th>
+            <th>İşe Başlama Tarihi</th>
+            <th>Doğum Tarihi</th>
+            <th>Doğum Yeri</th>
+            <th>Maaş</th>
+            <th>Prim</th>
+            <th>   </th>
+            <th>   </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.p_ad</td>
+                <td>@personel.p_soyad</td>
+                <td>@personel.cinsiyet</td>
+                <td>@personel.p_no</td>
+
+                <td>@personel.Departman.DepartmanIsmi</td>
+                @if (personel.ise_baslama_tarihi != null)
+                {
+                    <td>@personel.ise_baslama_tarihi.Value.ToString("dd/MM/yyyy")</td>
+}
+                @if (personel.dogum_tarihi != null)
+                {
+                    <td>@personel.dogum_tarihi.Value.ToString("dd/MM/yyyy")</td>
+}
+                @if (personel.dogum_yeri != null)
+                {
+                    <td>@personel.dogum_yeri</td>
+}
+                @if (personel.maas != null)
+                {
+                    <td>@personel.maas.Value.ToString("0000" + "$")</td>
+}
+                @if (personel.prim != null)
+                {
+                    <td>@personel.prim.Value.ToString("000" + "$")</td>
+}
+
+
+
+
+                <td>@Html.ActionLink("Güncelle", "Güncelle", new { id = personel.p_no }, new { @class = "btn btn-dark" }) </td>
+                @*<td>@Html.ActionLink("Sil", "Sil", new { id = personel.p_no }, new { @class = "btn btn-dark" })</td>*@
+                <td>@Html.ActionLink("Sil", "Sil", new { id = personel.p_no }, new { @class = "btn btn-dark btnPersonelSil" })</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
